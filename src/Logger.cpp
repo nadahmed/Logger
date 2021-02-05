@@ -170,7 +170,9 @@ Logger& Logger::getInstance()
 
 const char* Logger::asString(Level level)
 {
-    return LOG_LEVEL_STRINGS[level];
+    char* buffer = (char*) malloc(8);
+    strcpy_P(buffer, (PGM_P)pgm_read_word(&(LOG_LEVEL_STRINGS[level])));
+    return buffer;
 }
 
 
