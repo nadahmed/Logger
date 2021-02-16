@@ -170,9 +170,13 @@ Logger& Logger::getInstance()
 
 const char* Logger::asString(Level level)
 {
+#if defined(ESP8266)
+  return LOG_LEVEL_STRINGS[level];
+#else
     char* buffer = (char*) malloc(8);
     strcpy_P(buffer, (PGM_P)pgm_read_word(&(LOG_LEVEL_STRINGS[level])));
     return buffer;
+ #endif
 }
 
 
